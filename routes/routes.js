@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/productManagement.js';
 const router = Router();
 
 // Authentication routes - future implementation
@@ -7,11 +8,11 @@ router.post('/api/auth/login', (req, res) => res.json({ msg: 'Login route' })); 
 router.post('/api/auth/logout', (req, res) => res.json({ msg: 'Logout route' })); //invalidate the jwt
 
 // Product Management
-router.get('/api/products', (req, res) => res.json({ msg: 'Get all products' }));
-router.get('/api/products/:id', (req, res) => res.json({ msg: 'Get product by id' }));
-router.post('/api/products', (req, res) => res.json({ msg: 'Create product' }));
-router.put('/api/products/:id', (req, res) => res.json({ msg: 'Update product' }));
-router.delete('/api/products/:id', (req, res) => res.json({ msg: 'Delete product' }));
+router.get('/api/products', getAllProducts);
+router.get('/api/products/:id', getProductById);
+router.post('/api/products', createProduct);
+router.put('/api/products/:id', updateProduct);
+router.delete('/api/products/:id', deleteProduct);
 
 // User management - future implementation
 router.get('/api/users/profile', (req, res) => res.json({ msg: 'Get all users' }));
