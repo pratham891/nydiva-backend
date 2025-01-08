@@ -18,21 +18,13 @@ const productSchema = new Schema({
     type: Number,
     required: true
   },
-  category: {
-    type: String,
-    required: true
-  },
-  stock: {
-    type: Number,
-    required: true
-  },
+  // stock: {
+  //   type: Number,
+  //   required: true
+  // },
   images: [{
     type: String
-  }],
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+  }]
 });
 
 const Product = model('Product', productSchema);
