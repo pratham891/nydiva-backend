@@ -1,11 +1,6 @@
 import { Schema, model } from 'mongoose';
 
 const productSchema = new Schema({
-  productId: {
-    type: String,
-    required: true,
-    unique: true
-  },
   name: {
     type: String,
     required: true
