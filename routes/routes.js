@@ -1,10 +1,13 @@
 import { Router } from 'express';
 import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/productManagement.js';
+import { signup, login } from '../controllers/userAuthController.js';
+
+
 const router = Router();
 
 // Authentication routes - future implementation
-router.post('/auth/signup', (req, res) => res.json({ msg: 'Signup route' })); //register new user
-router.post('/auth/login', (req, res) => res.json({ msg: 'Login route' })); //login user & generate a jwt
+router.post('/auth/signup', signup); //register new user
+router.post('/auth/login', login); //login user & generate a jwt
 router.post('/auth/logout', (req, res) => res.json({ msg: 'Logout route' })); //invalidate the jwt
 
 // Product Management

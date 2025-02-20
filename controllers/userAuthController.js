@@ -1,7 +1,3 @@
-// FUTURE IMPLEMENTATION
-
-
-
 import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -10,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const signup = async (req, res) => {
-  const { userId, name, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
     // Check if user already exists
@@ -21,7 +17,6 @@ const signup = async (req, res) => {
 
     // Create new user
     user = new User({
-      userId,
       name,
       email,
       password
@@ -43,30 +38,33 @@ const login = async (req, res) => {
     // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.status(400).json({ msg: "User doesn't exists" });
     }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
+      return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     // Generate JWT
     const payload = {
       user: {
         id: user.id,
-        role: user.role
+        // role: user.role || 'user'
       }
     };
 
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
-      { expiresIn: '1d' },
+      { expiresIn: '5d' },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({
+          msg: "Login Success",
+          token: token
+        });
       }
     );
   } catch (error) {

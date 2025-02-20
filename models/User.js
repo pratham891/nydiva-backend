@@ -2,11 +2,6 @@ import { Schema, model } from 'mongoose';
 import { genSalt, hash } from 'bcrypt';
 
 const userSchema = new Schema({
-  userId: {
-    type: String,
-    required: true,
-    unique: true
-  },
   name: {
     type: String,
     required: true
@@ -19,11 +14,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
-  },
-  role: {
-    type: String,
-    enum: ['user', 'admin'],
-    default: 'user'
   },
   address: [{
     street: String,
