@@ -63,6 +63,7 @@ const login = async (req, res) => {
         if (err) throw err;
         res.json({
           msg: "Login Success",
+          username: user.name,
           token: token
         });
       }
