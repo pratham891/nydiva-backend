@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/productManagement.js';
 import { signup, login } from '../controllers/userAuthController.js';
+import { getUser, updateAddress } from '../controllers/userManagement.js';
 
 
 const router = Router();
@@ -17,7 +18,9 @@ router.post('/products', createProduct);
 router.put('/products/:id', updateProduct);
 router.delete('/products/:id', deleteProduct);
 
-// User management - future implementation
+// User management
+router.get('/user/:email', getUser);
+router.put('/user/:email/update-address', updateAddress);
 router.get('/users/profile', (req, res) => res.json({ msg: 'Get all users' }));
 router.put('/users/profile', (req, res) => res.json({ msg: 'Update user profile' }));
 router.get('/users/addresses', (req, res) => res.json({ msg: 'Get user addresses' }));

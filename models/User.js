@@ -16,7 +16,8 @@ const userSchema = new Schema({
     required: true
   },
   address: [{
-    street: String,
+    line01: String,
+    line02: String,
     city: String,
     state: String,
     zip: String,
