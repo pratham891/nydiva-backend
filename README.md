@@ -1,7 +1,7 @@
 # NyDiva International Backend Server
 
 ## Overview
-This backend server is designed to support the NyDiva International client and admin services. It is built using Node.js, Express, and MongoDB. The current implementation focuses on product management, with plans to expand to user authentication and order management in the future.
+This backend server is designed to support the NyDiva International client and admin services. It is built using Node.js, Express, and MongoDB. The current implementation focuses on product management and user authentication, with plans to expand to order management and cart management in the future.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -9,6 +9,8 @@ This backend server is designed to support the NyDiva International client and a
 - [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
   - [Product Management](#product-management)
+  - [User Authentication](#user-authentication)
+  - [User Management](#user-management)
   - [Future Implementations](#future-implementations)
 - [Future Plans](#future-plans)
 
@@ -39,7 +41,8 @@ JWT_SECRET=<your-jwt-secret>
 nydiva-backend/
 ├── controllers/
 │   ├── productManagement.js
-│   └── userAuthController.js
+│   ├── userAuthController.js
+│   └── userManagement.js
 ├── database/
 │   └── connection.js
 ├── models/
@@ -69,16 +72,29 @@ nydiva-backend/
 - **Delete a product**
   - `DELETE /api/products/:id`
 
+### User Authentication
+- **Register new user**
+  - `POST /api/auth/signup`
+- **Login user & generate a JWT**
+  - `POST /api/auth/login`
+- **Logout user & invalidate the JWT**
+  - `POST /api/auth/logout`
+
+### User Management
+- **Get user by email**
+  - `GET /api/user/:email`
+- **Update user address**
+  - `PUT /api/user/:email/update-address`
+- **Get all users** (future implementation)
+  - `GET /api/users/profile`
+- **Update user profile** (future implementation)
+  - `PUT /api/users/profile`
+- **Get user addresses** (future implementation)
+  - `GET /api/users/addresses`
+- **Add new address** (future implementation)
+  - `POST /api/users/addresses`
+
 ### Future Implementations
-- **User Authentication**
-  - `POST /api/auth/signup` - Register new user
-  - `POST /api/auth/login` - Login user & generate a JWT
-  - `POST /api/auth/logout` - Invalidate the JWT
-- **User Management**
-  - `GET /api/users/profile` - Get user profile
-  - `PUT /api/users/profile` - Update user profile
-  - `GET /api/users/addresses` - Get user addresses
-  - `POST /api/users/addresses` - Add new address
 - **Cart Management**
   - `GET /api/cart` - Get cart
   - `POST /api/cart` - Add to cart
@@ -95,9 +111,8 @@ nydiva-backend/
   - `GET /api/payments/:id` - Get payment status
 
 ## Future Plans
-1. **User Authentication**: Implement user registration, login, and JWT-based authentication.
-2. **Order Management**: Develop endpoints for creating, updating, and managing orders.
-3. **Cart Management**: Implement functionality for managing user carts.
-4. **Payments**: Integrate payment processing and status tracking.
+1. **Order Management**: Develop endpoints for creating, updating, and managing orders.
+2. **Cart Management**: Implement functionality for managing user carts.
+3. **Payments**: Integrate payment processing and status tracking.
 
 This documentation provides an overview of the current state of the backend server and outlines future development plans. For detailed information on each endpoint and model, refer to the respective files in the codebase.
