@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/productManagement.js';
 import { signup, login } from '../controllers/userAuthController.js';
 import { getUser, updateAddress } from '../controllers/userManagement.js';
+import { createOrder } from '../controllers/OrderManagement.js';
 
 
 const router = Router();
@@ -26,18 +27,18 @@ router.put('/users/profile', (req, res) => res.json({ msg: 'Update user profile'
 router.get('/users/addresses', (req, res) => res.json({ msg: 'Get user addresses' }));
 router.post('/users/addresses', (req, res) => res.json({ msg: 'add new address' }));
 
+// Order Managemment
+router.post('/orders', createOrder);
+router.get('/orders', (req, res) => res.json({ msg: 'Get all orders' }));
+router.get('/orders/:id', (req, res) => res.json({ msg: 'Get order by id' }));
+router.put('/orders/:id', (req, res) => res.json({ msg: 'Update order' }));
+router.delete('/orders/:id', (req, res) => res.json({ msg: 'Delete order' }));
+
 // Cart - future implementation
 router.get('/cart', (req, res) => res.json({ msg: 'Get cart' }));
 router.post('/cart', (req, res) => res.json({ msg: 'Add to cart' }));
 router.put('/cart/:itemId', (req, res) => res.json({ msg: 'Update cart item' }));
 router.delete('/cart/:itemId', (req, res) => res.json({ msg: 'Remove from cart' }));
-
-// Orders - future implementation
-router.get('/orders', (req, res) => res.json({ msg: 'Get all orders' }));
-router.get('/orders/:id', (req, res) => res.json({ msg: 'Get order by id' }));
-router.post('/orders', (req, res) => res.json({ msg: 'Create order' }));
-router.put('/orders/:id', (req, res) => res.json({ msg: 'Update order' }));
-router.delete('/orders/:id', (req, res) => res.json({ msg: 'Delete order' }));
 
 // Payments - future implementation
 router.post('/payments', (req, res) => res.json({ msg: 'Process payment' }));
