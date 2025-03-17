@@ -3,6 +3,7 @@ import { getAllProducts, getProductById, createProduct, updateProduct, deletePro
 import { signup, login } from '../controllers/userAuthController.js';
 import { getUser, updateAddress } from '../controllers/userManagement.js';
 import { createOrder } from '../controllers/OrderManagement.js';
+import { verifyPayment } from '../controllers/PaymentManagement.js';
 
 
 const router = Router();
@@ -41,6 +42,7 @@ router.put('/cart/:itemId', (req, res) => res.json({ msg: 'Update cart item' }))
 router.delete('/cart/:itemId', (req, res) => res.json({ msg: 'Remove from cart' }));
 
 // Payments - future implementation
+router.post('/payments/verify', verifyPayment);
 router.post('/payments', (req, res) => res.json({ msg: 'Process payment' }));
 router.get('/payments/:id', (req, res) => res.json({ msg: 'Get payment status' }));
 

@@ -9,7 +9,7 @@ export const createOrder = async (req, res) => {
   const { userEmail, items, totalPrice } = req.body;
 
   const newOrder = new Order({
-    orderId: null,
+    orderId: null, // this orderId will be used to verify the payment (not the same as razorpay_orderId received from frontend checkout)
     userId: null, // user's id from db
     items, // refer to Product Model
     totalPrice,
@@ -35,6 +35,6 @@ export const createOrder = async (req, res) => {
     const savedOrder = await newOrder.save();
     res.status(201).json(savedOrder);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: "Internal Server error", error: error.message });
   }
 };
