@@ -24,7 +24,10 @@ const signup = async (req, res) => {
 
     await user.save();
 
-    res.status(201).json({ msg: 'User registered successfully' });
+    res.status(201).json({
+      msg: 'User registered successfully',
+      userId: user._id
+    });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error');
@@ -63,6 +66,7 @@ const login = async (req, res) => {
         if (err) throw err;
         res.json({
           msg: "Login Success",
+          userId: user._id,
           username: user.name,
           token: token
         });

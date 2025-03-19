@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { getAllProducts, getProductById, createProduct, updateProduct, deleteProduct } from '../controllers/productManagement.js';
 import { signup, login } from '../controllers/userAuthController.js';
 import { getUser, updateAddress } from '../controllers/userManagement.js';
-import { createOrder, getAllOrders, updateOrderStatus } from '../controllers/OrderManagement.js';
+import { createOrder, getAllOrders, updateOrderStatus, getOrdersByUserId } from '../controllers/OrderManagement.js';
 import { verifyPayment } from '../controllers/PaymentManagement.js';
 
 
@@ -31,7 +31,7 @@ router.post('/users/addresses', (req, res) => res.json({ msg: 'add new address' 
 // Order Managemment
 router.post('/orders', createOrder);
 router.get('/orders', getAllOrders);
-router.get('/orders/:id', (req, res) => res.json({ msg: 'Get order by id' }));
+router.get('/orders/:userId', getOrdersByUserId);
 router.put('/orders/:orderId', updateOrderStatus);
 router.delete('/orders/:id', (req, res) => res.json({ msg: 'Delete order' }));
 

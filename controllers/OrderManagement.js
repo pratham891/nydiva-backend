@@ -69,3 +69,18 @@ export const updateOrderStatus = async (req, res) => {
     res.status(500).json({ message: "Internal Server error", error: error.message });
   }
 };
+
+// fetch orders based on userId
+export const getOrdersByUserId = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const orders = await Order.find({ userId }).populate('items.productId', 'name');
+    if (!orders.length) {
+      return res.status(404).json({ message: 'No orders found for this user' });
+    }
+    res.status(200).json(orders);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server error", error: error.message });
+  }
+};
