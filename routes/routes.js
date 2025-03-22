@@ -4,6 +4,7 @@ import { signup, login } from '../controllers/userAuthController.js';
 import { getUser, updateAddress } from '../controllers/userManagement.js';
 import { createOrder, getAllOrders, updateOrderStatus, getOrdersByUserId } from '../controllers/OrderManagement.js';
 import { verifyPayment } from '../controllers/PaymentManagement.js';
+import { adminLogin } from '../controllers/admin.js';
 
 
 const router = Router();
@@ -12,6 +13,9 @@ const router = Router();
 router.post('/auth/signup', signup); //register new user
 router.post('/auth/login', login); //login user & generate a jwt
 router.post('/auth/logout', (req, res) => res.json({ msg: 'Logout route' })); //invalidate the jwt
+
+// Admin authentication routes
+router.post('/auth/admin/login', adminLogin);
 
 // Product Management
 router.get('/products', getAllProducts);
